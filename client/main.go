@@ -30,10 +30,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	req.Header.Add("Content-Type", "text/event-stream")
-	req.Header.Add("Cache-Control", "no-cache")
-	req.Header.Add("Connection", "keep-alive")
-	req.Header.Add("Access-Control-Allow-Origin", "*")
+	//req.Header.Add("Content-Type", "text/event-stream")
+	//req.Header.Add("Cache-Control", "no-cache")
+	//req.Header.Add("Connection", "keep-alive")
+	//req.Header.Add("Access-Control-Allow-Origin", "*")
 
 	// send request
 	rs, err := c.Do(req)

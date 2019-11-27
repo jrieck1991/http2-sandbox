@@ -39,14 +39,11 @@ func stream(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("flush not supported by client"))
 	}
 
-	// set headers
-	w.Header().Set("Content-Type", "text/event-stream")
-	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
+	// send data
 	for i := 0; i < 100; i++ {
+
 		time.Sleep(1 * time.Second)
+
 		fmt.Fprintf(w, "%d\n", i)
 		flusher.Flush()
 	}
