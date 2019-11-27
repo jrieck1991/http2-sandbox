@@ -9,6 +9,8 @@ import (
 
 const (
 	addr string = "localhost:8080"
+	crt string = "internal/server/server.crt"
+	key string = "internal/server/server.key"
 )
 
 func main() {
@@ -28,7 +30,7 @@ func main() {
 	}()
 
 	// listen for client connections
-	if err := http.ListenAndServeTLS(addr, "internal/server/server.crt", "internal/server/server.key", b); err != nil {
+	if err := http.ListenAndServeTLS(addr, crt, key, b); err != nil {
 		panic(err)
 	}
 
