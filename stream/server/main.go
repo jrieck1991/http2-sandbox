@@ -17,6 +17,7 @@ const (
 
 func main() {
 
+	// init server
 	r := mux.NewRouter()
 	r.HandleFunc("/stream", stream)
 	s := &http.Server{
