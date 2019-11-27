@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	addr string = "https://localhost:8080"
+	addr string = "https://localhost:8080/stream"
 )
 
 func main() {
@@ -40,6 +40,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	log.Printf("connected: %+v", rs)
 
 	// copy data streamed to std out
 	n, err := io.Copy(os.Stdout, rs.Body)
