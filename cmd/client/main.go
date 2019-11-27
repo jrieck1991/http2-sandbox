@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/tls"
 	"io"
+	"log"
 	"net/http"
 	"os"
 
@@ -24,6 +25,7 @@ func main() {
 		},
 	}
 
+	// form request with headers to enable streaming
 	req, err := http.NewRequest("GET", addr, nil)
 	if err != nil {
 		panic(err)
@@ -33,10 +35,21 @@ func main() {
 	req.Header.Add("Connection", "keep-alive")
 	req.Header.Add("Access-Control-Allow-Origin", "*")
 
+	// send request
 	rs, err := c.Do(req)
 	if err != nil {
 		panic(err)
 	}
 
-	io.Copy(os.Stdout, rs.Body)
+	// copy data streamed to std out
+	n, err := io.Copy(os.Stdout, rs.Body)
+	if err != nil {
+		log.Printf("%d bytes written", n)
+		if err == io.EOF {
+			// no more data to read, exit without error
+			log.Println(err)
+		} else {
+			panic(err)
+		}
+	}
 }
